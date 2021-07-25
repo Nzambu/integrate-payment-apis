@@ -1,0 +1,610 @@
+openapi: 3.0.3
+info:
+  title: 'Patrick Microservices Example'
+  description: 'Sample microservices architecture integrating external application programming interfaces'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost/microservice'
+paths:
+  /api/login:
+    post:
+      summary: 'Authentication - Login'
+      description: "Users sign up or log in by making a post request with user email and password. The endpoint is open to the public to aid users gain access to their accounts.\nThe login credentials are explained in the body section below. Integration in sample languages is shown with example requests. The desired response is as\nshown in example response 200."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    type: profile
+                    id: '1'
+                    token:
+                      token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODY1YjRjMjk2Nzg0YjdmMTI3MjE1MWIzYTRmZWY4MDY1YzIxNWJjYWJmZjYyYWFlODkyYmNhOTg3ZWViMWE4MzNmOWZkNDMwZmU5Y2ZhMTMiLCJpYXQiOjE2MjcwNDQyMzAuNDk1OTIyLCJuYmYiOjE2MjcwNDQyMzAuNDk1OTM0LCJleHAiOjE2NTg1ODAyMzAuMzcxNjIzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Gv30f39xc8s3Eg1uFk61mbRtcIrGV9bGsbpF0QDcHTN_EzYt5XR43RBw-leQMSEd1ttzic2lk23-NX_ycOODyyg5nOLfVroCqsyM3AwhQyc5E9hTPeqlmq2CWYrE4d4PyESmOEr4M8AMITZrnUfl9J1kdFFX56bbHOMxWUBffxeyyZ3weH11E9959Uy2WYskTUIio_eb9HbTRU-ZWs5ACwkRscjafL5yyixXpPOSh7nLf0IhL-ccQ9hA2tWYV3kMx8_vaQ_UaIyp2-rNQZQleff-56A3X0vro9-NzrjYvDbxZPnudh21kPuAEh5QLex6LN6EhwL0vkb98ujWokAwDzSveKOVG2z8at8k6NSTtG2Wmxn_jNBm_yS1T_9JjLHO4O2wOCrhsjlXAeL86H0QSu00yZXNVGF9PHHqt7FWzAdKYxyyx6GPuHh6mVYYaUzxli5opqZ9WqSRBTGvKqjqjVf05XH922RlJY6y06CTu9qqFp9nSeHtXcINb1P8RWMFnygyxVkAAvPZNzHWQ7DLxatyS_QRB6jbpmTOW2tAzKF06-Fl34NFoSdSbNP3M2hp0IX85wkLE5ZS_zGq1kFK_xUTrK3W3-Lem6emDyd3F4hjZJwJTwQREbAw12tbFxItOFijr6-u6hepXybiu5NXXocmS_h2j1rrm4r0DkbQC0Y
+                      type: 'Bearer Token'
+                    attributes:
+                      first_name: Patrick
+                      middle_name: null
+                      last_name: Nzambu
+                    relationships:
+                      email:
+                        -
+                          -
+                            type: email
+                            id: '1'
+                            attributes:
+                              email: patricknzambu@gmail.com
+                              primary: 1
+                            links:
+                              self: 'http://localhost/microservice/gateway/public/api/user/1/email/1'
+                    links:
+                      self: 'http://localhost/microservice/gateway/public/api/profile/1'
+                properties:
+                  data:
+                    type: object
+                    example:
+                      type: profile
+                      id: '1'
+                      token:
+                        token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODY1YjRjMjk2Nzg0YjdmMTI3MjE1MWIzYTRmZWY4MDY1YzIxNWJjYWJmZjYyYWFlODkyYmNhOTg3ZWViMWE4MzNmOWZkNDMwZmU5Y2ZhMTMiLCJpYXQiOjE2MjcwNDQyMzAuNDk1OTIyLCJuYmYiOjE2MjcwNDQyMzAuNDk1OTM0LCJleHAiOjE2NTg1ODAyMzAuMzcxNjIzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Gv30f39xc8s3Eg1uFk61mbRtcIrGV9bGsbpF0QDcHTN_EzYt5XR43RBw-leQMSEd1ttzic2lk23-NX_ycOODyyg5nOLfVroCqsyM3AwhQyc5E9hTPeqlmq2CWYrE4d4PyESmOEr4M8AMITZrnUfl9J1kdFFX56bbHOMxWUBffxeyyZ3weH11E9959Uy2WYskTUIio_eb9HbTRU-ZWs5ACwkRscjafL5yyixXpPOSh7nLf0IhL-ccQ9hA2tWYV3kMx8_vaQ_UaIyp2-rNQZQleff-56A3X0vro9-NzrjYvDbxZPnudh21kPuAEh5QLex6LN6EhwL0vkb98ujWokAwDzSveKOVG2z8at8k6NSTtG2Wmxn_jNBm_yS1T_9JjLHO4O2wOCrhsjlXAeL86H0QSu00yZXNVGF9PHHqt7FWzAdKYxyyx6GPuHh6mVYYaUzxli5opqZ9WqSRBTGvKqjqjVf05XH922RlJY6y06CTu9qqFp9nSeHtXcINb1P8RWMFnygyxVkAAvPZNzHWQ7DLxatyS_QRB6jbpmTOW2tAzKF06-Fl34NFoSdSbNP3M2hp0IX85wkLE5ZS_zGq1kFK_xUTrK3W3-Lem6emDyd3F4hjZJwJTwQREbAw12tbFxItOFijr6-u6hepXybiu5NXXocmS_h2j1rrm4r0DkbQC0Y
+                        type: 'Bearer Token'
+                      attributes:
+                        first_name: Patrick
+                        middle_name: null
+                        last_name: Nzambu
+                      relationships:
+                        email:
+                          -
+                            -
+                              type: email
+                              id: '1'
+                              attributes:
+                                email: patricknzambu@gmail.com
+                                primary: 1
+                              links:
+                                self: 'http://localhost/microservice/gateway/public/api/user/1/email/1'
+                      links:
+                        self: 'http://localhost/microservice/gateway/public/api/profile/1'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The primary email for the user''s account.'
+                  example: et
+                password:
+                  type: string
+                  description: 'The secret word for the user''s account.'
+                  example: quia
+              required:
+                - email
+                - password
+      security: []
+  /api/register:
+    post:
+      summary: 'Authentication - Register'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'The first name of the user. Must not be greater than 45 characters.'
+                  example: ejvnxlkeuzmkbap
+                middle_name:
+                  type: string
+                  description: 'The middle name of the user. Must not be greater than 45 characters.'
+                  example: onlywdxd
+                last_name:
+                  type: string
+                  description: 'The last name of the user. Must not be greater than 45 characters.'
+                  example: pfudghjqfheddxahtlvj
+                email:
+                  type: string
+                  description: 'The primary email for the user''s account. Must be a valid email address.'
+                  example: abeatty@example.net
+                password:
+                  type: string
+                  description: 'The secret word for user''s account. Must be at least 8 characters.'
+                  example: fufwcz
+                password_confirmation:
+                  type: string
+                  description: 'A confirmation of the secret word for the user''s account. Must be at least 8 characters.'
+                  example: qoiozosg
+              required:
+                - first_name
+                - last_name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/logout:
+    post:
+      summary: 'Authentication - Logout'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'You have been successfully logged out!'
+                properties:
+                  message:
+                    type: string
+                    example: 'You have been successfully logged out!'
+      tags:
+        - Authentication
+      security: []
+  /api/pay:
+    post:
+      summary: 'Payment - Create'
+      description: "Make a post request to create a new payment record. Provided form data should be in json format and supplied according to the given example request.\nThe expected response should be similar to example response shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  transaction:
+                    type: payment
+                    id: '1'
+                    attributes:
+                      text: QUEUED
+                      reference: DEMONEWR313EE1507797667127261164
+                      timestamp: '2017-10-12 11:41:07'
+                      balance_as_of_now: 1840984
+                properties:
+                  transaction:
+                    type: object
+                    example:
+                      type: payment
+                      id: '1'
+                      attributes:
+                        text: QUEUED
+                        reference: DEMONEWR313EE1507797667127261164
+                        timestamp: '2017-10-12 11:41:07'
+                        balance_as_of_now: 1840984
+      tags:
+        - Payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  description: 'The phone number of the recipient'
+                  example: incidunt
+                amount:
+                  type: integer
+                  description: 'The amount to sent'
+                  example: 3
+              required:
+                - phone
+                - amount
+  '/api/pay/{id}':
+    get:
+      summary: 'Payment - Show'
+      description: "Make a get request to search a particular record. Provide the id of the record at the end of the route as shown on the given example request.\nThe expected response should be similar to example response shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  transaction:
+                    type: payment
+                    id: '1'
+                    attributes:
+                      text: QUEUED
+                      reference: DEMONEWR313EE1507797667127261164
+                      timestamp: '2017-10-12 11:41:07'
+                      balance_as_of_now: 1840984
+                properties:
+                  transaction:
+                    type: object
+                    example:
+                      type: payment
+                      id: '1'
+                      attributes:
+                        text: QUEUED
+                        reference: DEMONEWR313EE1507797667127261164
+                        timestamp: '2017-10-12 11:41:07'
+                        balance_as_of_now: 1840984
+      tags:
+        - Payment
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the pay.'
+        example: incidunt
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: pay
+        description: 'The reference id of the transaction'
+        example: consequatur
+        required: true
+        schema:
+          type: string
+  /api/profile:
+    get:
+      summary: 'Profile - List'
+      description: "Make a get request using the endpoint to obtain a list of all available records. The endpoint has no route parameters as seen on the\ngiven example request. The desired response will be similar to the example response shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: profile
+                      id: '1'
+                      attributes:
+                        name: 'Brandt Abshire'
+                        email: nkuhn@example.com
+                    -
+                      type: profile
+                      id: '2'
+                      attributes:
+                        name: 'Cicero Franecki DVM'
+                        email: lwindler@example.org
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: profile
+                        id: '1'
+                        attributes:
+                          name: 'Brandt Abshire'
+                          email: nkuhn@example.com
+                      -
+                        type: profile
+                        id: '2'
+                        attributes:
+                          name: 'Cicero Franecki DVM'
+                          email: lwindler@example.org
+                    items:
+                      type: object
+      tags:
+        - Profile
+    post:
+      summary: 'Profile - Create'
+      description: "Make a post request to create a new record. Provided form data should be in json format and supplied according to the given example request.\nThe expected response should be similar to example response shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: '201'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  profile:
+                    type: profile
+                    id: '2'
+                    attributes:
+                      name: 'Brandt Abshire'
+                      email: nkuhn@example.com
+                properties:
+                  profile:
+                    type: object
+                    example:
+                      type: profile
+                      id: '2'
+                      attributes:
+                        name: 'Brandt Abshire'
+                        email: nkuhn@example.com
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The full name of the customer profile'
+                  example: alias
+                email:
+                  type: string
+                  description: 'The email of the customer'
+                  example: cupiditate
+              required:
+                - name
+                - email
+  '/api/profile/{id}':
+    get:
+      summary: 'Profile - Show'
+      description: "Make a get request to select a particular record. Provide the id of the record at the end of the route as shown on the given example request.\nThe expected response should be similar to example response shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  profile:
+                    type: profile
+                    id: '2'
+                    attributes:
+                      name: 'Brandt Abshire'
+                      email: nkuhn@example.com
+                properties:
+                  profile:
+                    type: object
+                    example:
+                      type: profile
+                      id: '2'
+                      attributes:
+                        name: 'Brandt Abshire'
+                        email: nkuhn@example.com
+      tags:
+        - Profile
+    put:
+      summary: 'Profile - Update'
+      description: "Make a put or patch request to update the record. Provide the id of the record at the end of the route as shown on the given example request.\nThe form data should be in json format and provided according to the example request. The expected response should be similar to example\nresponse shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  profile:
+                    type: profile
+                    id: '2'
+                    attributes:
+                      name: 'Brandt Abshire'
+                      email: nkuhn@example.com
+                properties:
+                  profile:
+                    type: object
+                    example:
+                      type: profile
+                      id: '2'
+                      attributes:
+                        name: 'Brandt Abshire'
+                        email: nkuhn@example.com
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The full name of the customer profile'
+                  example: quis
+                email:
+                  type: string
+                  description: 'The email of the customer'
+                  example: rerum
+              required:
+                - name
+                - email
+    delete:
+      summary: 'Profile - Delete'
+      description: "Make a delete request to remove the record. Provide the id of the record at the end of the route as shown on the given example request.\nThe expected response should be similar to example response shown."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  profile:
+                    type: profile
+                    id: '2'
+                    attributes:
+                      name: 'Brandt Abshire'
+                      email: nkuhn@example.com
+                properties:
+                  profile:
+                    type: object
+                    example:
+                      type: profile
+                      id: '2'
+                      attributes:
+                        name: 'Brandt Abshire'
+                        email: nkuhn@example.com
+      tags:
+        - Profile
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the profile.'
+        example: odit
+        required: true
+        schema:
+          type: string

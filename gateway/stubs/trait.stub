@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+trait DummyTrait
+{
+    
+    /**
+    * Create regular or static methods here
+    */
+
+}

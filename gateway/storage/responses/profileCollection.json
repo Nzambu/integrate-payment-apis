@@ -1,0 +1,19 @@
+{ "data" : [
+        {
+            "type": "profile",
+            "id": "1",
+            "attributes": {
+                "name": "Brandt Abshire",
+                "email": "nkuhn@example.com"
+            }
+        },
+        {
+            "type": "profile",
+            "id": "2",
+            "attributes": {
+                "name": "Cicero Franecki DVM",
+                "email": "lwindler@example.org"
+            }
+        }
+    ]
+}

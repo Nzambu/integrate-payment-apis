@@ -1,0 +1,89 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
+class DummyService
+{
+
+    private $http_request = '';
+
+    public function __construct(Request $request) 
+    {
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ];
+
+        $this->http_request = Http::withToken($request->bearerToken())->withHeaders($headers);
+
+    }
+
+    /**
+     * Read all records
+     *
+     * @return object A collection of available records
+     */
+    public function index() 
+    {
+
+        return $this->http_request->get('http://localhost/microservice/profile_service/public/api/service/profile');
+        
+    }
+
+    /**
+     * Store new record
+     *
+     * @return object The new record
+     */
+    public function store($request) 
+    {
+
+        $data = $request;
+        return $this->http_request->post('http://localhost/microservice/profile_service/public/api/service/profile', $data);
+
+    }
+
+    /**
+     * Read particular record
+     *
+     * @return object The selected record
+     */
+    public function show($request) 
+    {
+
+        $id = $request->id;
+        return $this->http_request->get('http://localhost/microservice/profile_service/public/api/service/profile/'.$id);
+
+    }
+
+    /**
+     * Update particular record
+     *
+     * @return object The updated record
+     */
+    public function update($request) 
+    {
+
+        $id = $request->id;
+        $data = $request;
+        return $this->http_request->patch('http://localhost/microservice/profile_service/public/api/service/profile'.$id, $data);
+
+    }
+
+    /**
+     * Delete particular record
+     *
+     * @return object The selected record
+     */
+    public function destroy($request) 
+    {
+
+        $id = $request->id;
+        return $this->http_request->get('http://localhost/microservice/profile_service/public/api/service/profile/'.$id);
+
+    }
+}

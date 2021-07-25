@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Patrick Microservices Example</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+    <script src="../docs/js/theme-default-3.7.0.js"></script>
+
+    <link rel="stylesheet"
+          href="//unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="//cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script>
+        var baseUrl = "http://localhost/microservice/";
+    </script>
+    <script src="../docs/js/tryitout-3.7.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+<a href="#" id="nav-button">
+      <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+      </span>
+</a>
+<div class="tocify-wrapper">
+                <div class="lang-selector">
+                            <a href="#" data-language-name="bash">bash</a>
+                            <a href="#" data-language-name="javascript">javascript</a>
+                    </div>
+        <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+
+    <ul id="toc">
+    </ul>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+            <ul class="toc-footer" id="last-updated">
+            <li>Last updated: July 25 2021</li>
+        </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1>Introduction</h1>
+<p>Sample microservices architecture integrating external application programming interfaces</p>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://localhost/microservice/</code></pre>
+
+        <h1>Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="authentication">Authentication</h1>
+
+    <p>Only authenticated users can make the get, post, put, patch and delete requests using the endpoints provided in this section.
+Integration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to
+provide the parameters in the right place.</p>
+
+            <h2 id="authentication-POSTapi-login">Authentication - Login</h2>
+
+<p>
+</p>
+
+<p>Users sign up or log in by making a post request with user email and password. The endpoint is open to the public to aid users gain access to their accounts.
+The login credentials are explained in the body section below. Integration in sample languages is shown with example requests. The desired response is as
+shown in example response 200.</p>
+
+<span id="example-requests-POSTapi-login">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost/microservice/api/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"et\",
+    \"password\": \"quia\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "et",
+    "password": "quia"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-login">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;type&quot;: &quot;profile&quot;,
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;token&quot;: {
+            &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODY1YjRjMjk2Nzg0YjdmMTI3MjE1MWIzYTRmZWY4MDY1YzIxNWJjYWJmZjYyYWFlODkyYmNhOTg3ZWViMWE4MzNmOWZkNDMwZmU5Y2ZhMTMiLCJpYXQiOjE2MjcwNDQyMzAuNDk1OTIyLCJuYmYiOjE2MjcwNDQyMzAuNDk1OTM0LCJleHAiOjE2NTg1ODAyMzAuMzcxNjIzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Gv30f39xc8s3Eg1uFk61mbRtcIrGV9bGsbpF0QDcHTN_EzYt5XR43RBw-leQMSEd1ttzic2lk23-NX_ycOODyyg5nOLfVroCqsyM3AwhQyc5E9hTPeqlmq2CWYrE4d4PyESmOEr4M8AMITZrnUfl9J1kdFFX56bbHOMxWUBffxeyyZ3weH11E9959Uy2WYskTUIio_eb9HbTRU-ZWs5ACwkRscjafL5yyixXpPOSh7nLf0IhL-ccQ9hA2tWYV3kMx8_vaQ_UaIyp2-rNQZQleff-56A3X0vro9-NzrjYvDbxZPnudh21kPuAEh5QLex6LN6EhwL0vkb98ujWokAwDzSveKOVG2z8at8k6NSTtG2Wmxn_jNBm_yS1T_9JjLHO4O2wOCrhsjlXAeL86H0QSu00yZXNVGF9PHHqt7FWzAdKYxyyx6GPuHh6mVYYaUzxli5opqZ9WqSRBTGvKqjqjVf05XH922RlJY6y06CTu9qqFp9nSeHtXcINb1P8RWMFnygyxVkAAvPZNzHWQ7DLxatyS_QRB6jbpmTOW2tAzKF06-Fl34NFoSdSbNP3M2hp0IX85wkLE5ZS_zGq1kFK_xUTrK3W3-Lem6emDyd3F4hjZJwJTwQREbAw12tbFxItOFijr6-u6hepXybiu5NXXocmS_h2j1rrm4r0DkbQC0Y&quot;,
+            &quot;type&quot;: &quot;Bearer Token&quot;
+        },
+        &quot;attributes&quot;: {
+            &quot;first_name&quot;: &quot;Patrick&quot;,
+            &quot;middle_name&quot;: null,
+            &quot;last_name&quot;: &quot;Nzambu&quot;
+        },
+        &quot;relationships&quot;: {
+            &quot;email&quot;: [
+                [
+                    {
+                        &quot;type&quot;: &quot;email&quot;,
+                        &quot;id&quot;: &quot;1&quot;,
+                        &quot;attributes&quot;: {
+                            &quot;email&quot;: &quot;patricknzambu@gmail.com&quot;,
+                            &quot;primary&quot;: 1
+                        },
+                        &quot;links&quot;: {
+                            &quot;self&quot;: &quot;http:\/\/localhost\/microservice\/gateway\/public\/api\/user\/1\/email\/1&quot;
+                        }
+                    }
+                ]
+            ]
+        },
+        &quot;links&quot;: {
+            &quot;self&quot;: &quot;http:\/\/localhost\/microservice\/gateway\/public\/api\/profile\/1&quot;
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-login"></code></pre>
+</span>
+<span id="execution-error-POSTapi-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-login"></code></pre>
+</span>
+<form id="form-POSTapi-login" data-method="POST"
+      data-path="api/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-login"
+                    onclick="tryItOut('POSTapi-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-login"
+                    onclick="cancelTryOut('POSTapi-login');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/login</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-login"
+               data-component="body" required  hidden>
+    <br>
+<p>The primary email for the user's account.</p>        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-login"
+               data-component="body" required  hidden>
+    <br>
+<p>The secret word for the user's account.</p>        </p>
+    
+    </form>
+
+            <h2 id="authentication-POSTapi-register">Authentication - Register</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-register">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost/microservice/api/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"first_name\": \"ejvnxlkeuzmkbap\",
+    \"middle_name\": \"onlywdxd\",
+    \"last_name\": \"pfudghjqfheddxahtlvj\",
+    \"email\": \"abeatty@example.net\",
+    \"password\": \"fufwcz\",
+    \"password_confirmation\": \"qoiozosg\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "first_name": "ejvnxlkeuzmkbap",
+    "middle_name": "onlywdxd",
+    "last_name": "pfudghjqfheddxahtlvj",
+    "email": "abeatty@example.net",
+    "password": "fufwcz",
+    "password_confirmation": "qoiozosg"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-register">
+</span>
+<span id="execution-results-POSTapi-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-register"></code></pre>
+</span>
+<span id="execution-error-POSTapi-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-register"></code></pre>
+</span>
+<form id="form-POSTapi-register" data-method="POST"
+      data-path="api/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-register"
+                    onclick="tryItOut('POSTapi-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-register"
+                    onclick="cancelTryOut('POSTapi-register');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-register" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/register</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>first_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="first_name"
+               data-endpoint="POSTapi-register"
+               data-component="body" required  hidden>
+    <br>
+<p>The first name of the user. Must not be greater than 45 characters.</p>        </p>
+                <p>
+            <b><code>middle_name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="middle_name"
+               data-endpoint="POSTapi-register"
+               data-component="body"  hidden>
+    <br>
+<p>The middle name of the user. Must not be greater than 45 characters.</p>        </p>
+                <p>
+            <b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="last_name"
+               data-endpoint="POSTapi-register"
+               data-component="body" required  hidden>
+    <br>
+<p>The last name of the user. Must not be greater than 45 characters.</p>        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-register"
+               data-component="body" required  hidden>
+    <br>
+<p>The primary email for the user's account. Must be a valid email address.</p>        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-register"
+               data-component="body" required  hidden>
+    <br>
+<p>The secret word for user's account. Must be at least 8 characters.</p>        </p>
+                <p>
+            <b><code>password_confirmation</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password_confirmation"
+               data-endpoint="POSTapi-register"
+               data-component="body" required  hidden>
+    <br>
+<p>A confirmation of the secret word for the user's account. Must be at least 8 characters.</p>        </p>
+    
+    </form>
+
+            <h2 id="authentication-POSTapi-logout">Authentication - Logout</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-logout">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost/microservice/api/logout" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/logout"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-logout">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;You have been successfully logged out!&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-logout"></code></pre>
+</span>
+<span id="execution-error-POSTapi-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-logout"></code></pre>
+</span>
+<form id="form-POSTapi-logout" data-method="POST"
+      data-path="api/logout"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-logout"
+                    onclick="tryItOut('POSTapi-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-logout"
+                    onclick="cancelTryOut('POSTapi-logout');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-logout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/logout</code></b>
+        </p>
+                    </form>
+
+        <h1 id="payment">Payment</h1>
+
+    <p>Only authenticated users can make the get and post requests using the endpoints provided in this section.
+Integration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to
+provide the parameters in the right place.</p>
+
+            <h2 id="payment-POSTapi-pay">Payment - Create</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a post request to create a new payment record. Provided form data should be in json format and supplied according to the given example request.
+The expected response should be similar to example response shown.</p>
+
+<span id="example-requests-POSTapi-pay">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost/microservice/api/pay" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"phone\": \"incidunt\",
+    \"amount\": 3
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/pay"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "phone": "incidunt",
+    "amount": 3
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-pay">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;transaction&quot;: {
+        &quot;type&quot;: &quot;payment&quot;,
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;attributes&quot;: {
+            &quot;text&quot;: &quot;QUEUED&quot;,
+            &quot;reference&quot;: &quot;DEMONEWR313EE1507797667127261164&quot;,
+            &quot;timestamp&quot;: &quot;2017-10-12 11:41:07&quot;,
+            &quot;balance_as_of_now&quot;: 1840984
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-pay" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-pay"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-pay"></code></pre>
+</span>
+<span id="execution-error-POSTapi-pay" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-pay"></code></pre>
+</span>
+<form id="form-POSTapi-pay" data-method="POST"
+      data-path="api/pay"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-pay', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-pay"
+                    onclick="tryItOut('POSTapi-pay');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-pay"
+                    onclick="cancelTryOut('POSTapi-pay');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-pay" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/pay</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-pay" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-pay"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>phone</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="phone"
+               data-endpoint="POSTapi-pay"
+               data-component="body" required  hidden>
+    <br>
+<p>The phone number of the recipient</p>        </p>
+                <p>
+            <b><code>amount</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="amount"
+               data-endpoint="POSTapi-pay"
+               data-component="body" required  hidden>
+    <br>
+<p>The amount to sent</p>        </p>
+    
+    </form>
+
+            <h2 id="payment-GETapi-pay--id-">Payment - Show</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a get request to search a particular record. Provide the id of the record at the end of the route as shown on the given example request.
+The expected response should be similar to example response shown.</p>
+
+<span id="example-requests-GETapi-pay--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/microservice/api/pay/incidunt" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/pay/incidunt"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-pay--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;transaction&quot;: {
+        &quot;type&quot;: &quot;payment&quot;,
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;attributes&quot;: {
+            &quot;text&quot;: &quot;QUEUED&quot;,
+            &quot;reference&quot;: &quot;DEMONEWR313EE1507797667127261164&quot;,
+            &quot;timestamp&quot;: &quot;2017-10-12 11:41:07&quot;,
+            &quot;balance_as_of_now&quot;: 1840984
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-pay--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-pay--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-pay--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-pay--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-pay--id-"></code></pre>
+</span>
+<form id="form-GETapi-pay--id-" data-method="GET"
+      data-path="api/pay/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-pay--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-pay--id-"
+                    onclick="tryItOut('GETapi-pay--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-pay--id-"
+                    onclick="cancelTryOut('GETapi-pay--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-pay--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/pay/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-pay--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-pay--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="GETapi-pay--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the pay.</p>            </p>
+                    <p>
+                <b><code>pay</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="pay"
+               data-endpoint="GETapi-pay--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The reference id of the transaction</p>            </p>
+                    </form>
+
+        <h1 id="profile">Profile</h1>
+
+    <p>Only authenticated users can make the get, post, put, patch and delete requests using the endpoints provided in this section.
+Integration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to
+provide the parameters in the right place.</p>
+
+            <h2 id="profile-GETapi-profile">Profile - List</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a get request using the endpoint to obtain a list of all available records. The endpoint has no route parameters as seen on the
+given example request. The desired response will be similar to the example response shown.</p>
+
+<span id="example-requests-GETapi-profile">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/microservice/api/profile" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/profile"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-profile">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;type&quot;: &quot;profile&quot;,
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;attributes&quot;: {
+                &quot;name&quot;: &quot;Brandt Abshire&quot;,
+                &quot;email&quot;: &quot;nkuhn@example.com&quot;
+            }
+        },
+        {
+            &quot;type&quot;: &quot;profile&quot;,
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;attributes&quot;: {
+                &quot;name&quot;: &quot;Cicero Franecki DVM&quot;,
+                &quot;email&quot;: &quot;lwindler@example.org&quot;
+            }
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-profile" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-profile"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-profile"></code></pre>
+</span>
+<span id="execution-error-GETapi-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-profile"></code></pre>
+</span>
+<form id="form-GETapi-profile" data-method="GET"
+      data-path="api/profile"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-profile', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-profile"
+                    onclick="tryItOut('GETapi-profile');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-profile"
+                    onclick="cancelTryOut('GETapi-profile');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-profile" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/profile</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-profile" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-profile"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="profile-POSTapi-profile">Profile - Create</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a post request to create a new record. Provided form data should be in json format and supplied according to the given example request.
+The expected response should be similar to example response shown.</p>
+
+<span id="example-requests-POSTapi-profile">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost/microservice/api/profile" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"alias\",
+    \"email\": \"cupiditate\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/profile"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "alias",
+    "email": "cupiditate"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-profile">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;profile&quot;: {
+        &quot;type&quot;: &quot;profile&quot;,
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Brandt Abshire&quot;,
+            &quot;email&quot;: &quot;nkuhn@example.com&quot;
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-profile" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-profile"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-profile"></code></pre>
+</span>
+<span id="execution-error-POSTapi-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-profile"></code></pre>
+</span>
+<form id="form-POSTapi-profile" data-method="POST"
+      data-path="api/profile"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-profile', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-profile"
+                    onclick="tryItOut('POSTapi-profile');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-profile"
+                    onclick="cancelTryOut('POSTapi-profile');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-profile" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/profile</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-profile" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-profile"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-profile"
+               data-component="body" required  hidden>
+    <br>
+<p>The full name of the customer profile</p>        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-profile"
+               data-component="body" required  hidden>
+    <br>
+<p>The email of the customer</p>        </p>
+    
+    </form>
+
+            <h2 id="profile-GETapi-profile--id-">Profile - Show</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a get request to select a particular record. Provide the id of the record at the end of the route as shown on the given example request.
+The expected response should be similar to example response shown.</p>
+
+<span id="example-requests-GETapi-profile--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/microservice/api/profile/odit" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/profile/odit"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-profile--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;profile&quot;: {
+        &quot;type&quot;: &quot;profile&quot;,
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Brandt Abshire&quot;,
+            &quot;email&quot;: &quot;nkuhn@example.com&quot;
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-profile--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-profile--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-profile--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-profile--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-profile--id-"></code></pre>
+</span>
+<form id="form-GETapi-profile--id-" data-method="GET"
+      data-path="api/profile/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-profile--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-profile--id-"
+                    onclick="tryItOut('GETapi-profile--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-profile--id-"
+                    onclick="cancelTryOut('GETapi-profile--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-profile--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/profile/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-profile--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-profile--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="GETapi-profile--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the profile.</p>            </p>
+                    </form>
+
+            <h2 id="profile-PUTapi-profile--id-">Profile - Update</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a put or patch request to update the record. Provide the id of the record at the end of the route as shown on the given example request.
+The form data should be in json format and provided according to the example request. The expected response should be similar to example
+response shown.</p>
+
+<span id="example-requests-PUTapi-profile--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request PUT \
+    "http://localhost/microservice/api/profile/similique" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"quis\",
+    \"email\": \"rerum\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/profile/similique"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "quis",
+    "email": "rerum"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-PUTapi-profile--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;profile&quot;: {
+        &quot;type&quot;: &quot;profile&quot;,
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Brandt Abshire&quot;,
+            &quot;email&quot;: &quot;nkuhn@example.com&quot;
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-profile--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-profile--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-profile--id-"></code></pre>
+</span>
+<span id="execution-error-PUTapi-profile--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-profile--id-"></code></pre>
+</span>
+<form id="form-PUTapi-profile--id-" data-method="PUT"
+      data-path="api/profile/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-profile--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-profile--id-"
+                    onclick="tryItOut('PUTapi-profile--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-profile--id-"
+                    onclick="cancelTryOut('PUTapi-profile--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-profile--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/profile/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/profile/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-PUTapi-profile--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="PUTapi-profile--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="PUTapi-profile--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the profile.</p>            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="PUTapi-profile--id-"
+               data-component="body" required  hidden>
+    <br>
+<p>The full name of the customer profile</p>        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="PUTapi-profile--id-"
+               data-component="body" required  hidden>
+    <br>
+<p>The email of the customer</p>        </p>
+    
+    </form>
+
+            <h2 id="profile-DELETEapi-profile--id-">Profile - Delete</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Make a delete request to remove the record. Provide the id of the record at the end of the route as shown on the given example request.
+The expected response should be similar to example response shown.</p>
+
+<span id="example-requests-DELETEapi-profile--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/microservice/api/profile/numquam" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/microservice/api/profile/numquam"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-DELETEapi-profile--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;profile&quot;: {
+        &quot;type&quot;: &quot;profile&quot;,
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Brandt Abshire&quot;,
+            &quot;email&quot;: &quot;nkuhn@example.com&quot;
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-profile--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-profile--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-profile--id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-profile--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-profile--id-"></code></pre>
+</span>
+<form id="form-DELETEapi-profile--id-" data-method="DELETE"
+      data-path="api/profile/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-profile--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-profile--id-"
+                    onclick="tryItOut('DELETEapi-profile--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-profile--id-"
+                    onclick="cancelTryOut('DELETEapi-profile--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-profile--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/profile/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEapi-profile--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="DELETEapi-profile--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="DELETEapi-profile--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the profile.</p>            </p>
+                    </form>
+
+    
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+            </div>
+</div>
+<script>
+    $(function () {
+        var exampleLanguages = ["bash","javascript"];
+        setupLanguages(exampleLanguages);
+    });
+</script>
+</body>
+</html>

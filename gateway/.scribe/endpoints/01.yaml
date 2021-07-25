@@ -1,0 +1,101 @@
+name: Payment
+description: |-
+
+  Only authenticated users can make the get and post requests using the endpoints provided in this section. 
+  Integration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to
+  provide the parameters in the right place.
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/pay
+    metadata:
+      title: 'Payment - Create'
+      description: |-
+        Make a post request to create a new payment record. Provided form data should be in json format and supplied according to the given example request.
+        The expected response should be similar to example response shown.
+      authenticated: true
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      phone:
+        name: phone
+        description: 'The phone number of the recipient'
+        required: true
+        example: incidunt
+        type: string
+      amount:
+        name: amount
+        description: 'The amount to sent'
+        required: true
+        example: 3
+        type: integer
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "transaction": {
+                  "type": "payment",
+                  "id": "1",
+                  "attributes": {
+                      "text": "QUEUED",
+                      "reference": "DEMONEWR313EE1507797667127261164",
+                      "timestamp": "2017-10-12 11:41:07",
+                      "balance_as_of_now": 1840984
+                  }
+              }
+          }
+        headers: []
+        description: '200'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/pay/{id}'
+    metadata:
+      title: 'Payment - Show'
+      description: |-
+        Make a get request to search a particular record. Provide the id of the record at the end of the route as shown on the given example request.
+        The expected response should be similar to example response shown.
+      authenticated: true
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the pay.'
+        required: true
+        example: incidunt
+        type: string
+      pay:
+        name: pay
+        description: 'The reference id of the transaction'
+        required: true
+        example: consequatur
+        type: string
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "transaction": {
+                  "type": "payment",
+                  "id": "1",
+                  "attributes": {
+                      "text": "QUEUED",
+                      "reference": "DEMONEWR313EE1507797667127261164",
+                      "timestamp": "2017-10-12 11:41:07",
+                      "balance_as_of_now": 1840984
+                  }
+              }
+          }
+        headers: []
+        description: '200'
+    responseFields: []

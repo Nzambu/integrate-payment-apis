@@ -1,0 +1,425 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "localhost"
+        }
+    ],
+    "info": {
+        "name": "Patrick Microservices Example",
+        "_postman_id": "5d27b4ec-feaa-4c7a-ae17-3c2de047c080",
+        "description": "Sample microservices architecture integrating external application programming interfaces",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "description": "\nOnly authenticated users can make the get, post, put, patch and delete requests using the endpoints provided in this section. \nIntegration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to\nprovide the parameters in the right place.",
+            "item": [
+                {
+                    "name": "Authentication - Login",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"et\",\"password\":\"quia\"}"
+                        },
+                        "description": "Users sign up or log in by making a post request with user email and password. The endpoint is open to the public to aid users gain access to their accounts.\nThe login credentials are explained in the body section below. Integration in sample languages is shown with example requests. The desired response is as\nshown in example response 200.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"data\": {\n        \"type\": \"profile\",\n        \"id\": \"1\",\n        \"token\": {\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODY1YjRjMjk2Nzg0YjdmMTI3MjE1MWIzYTRmZWY4MDY1YzIxNWJjYWJmZjYyYWFlODkyYmNhOTg3ZWViMWE4MzNmOWZkNDMwZmU5Y2ZhMTMiLCJpYXQiOjE2MjcwNDQyMzAuNDk1OTIyLCJuYmYiOjE2MjcwNDQyMzAuNDk1OTM0LCJleHAiOjE2NTg1ODAyMzAuMzcxNjIzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Gv30f39xc8s3Eg1uFk61mbRtcIrGV9bGsbpF0QDcHTN_EzYt5XR43RBw-leQMSEd1ttzic2lk23-NX_ycOODyyg5nOLfVroCqsyM3AwhQyc5E9hTPeqlmq2CWYrE4d4PyESmOEr4M8AMITZrnUfl9J1kdFFX56bbHOMxWUBffxeyyZ3weH11E9959Uy2WYskTUIio_eb9HbTRU-ZWs5ACwkRscjafL5yyixXpPOSh7nLf0IhL-ccQ9hA2tWYV3kMx8_vaQ_UaIyp2-rNQZQleff-56A3X0vro9-NzrjYvDbxZPnudh21kPuAEh5QLex6LN6EhwL0vkb98ujWokAwDzSveKOVG2z8at8k6NSTtG2Wmxn_jNBm_yS1T_9JjLHO4O2wOCrhsjlXAeL86H0QSu00yZXNVGF9PHHqt7FWzAdKYxyyx6GPuHh6mVYYaUzxli5opqZ9WqSRBTGvKqjqjVf05XH922RlJY6y06CTu9qqFp9nSeHtXcINb1P8RWMFnygyxVkAAvPZNzHWQ7DLxatyS_QRB6jbpmTOW2tAzKF06-Fl34NFoSdSbNP3M2hp0IX85wkLE5ZS_zGq1kFK_xUTrK3W3-Lem6emDyd3F4hjZJwJTwQREbAw12tbFxItOFijr6-u6hepXybiu5NXXocmS_h2j1rrm4r0DkbQC0Y\",\n            \"type\": \"Bearer Token\"\n        },\n        \"attributes\": {\n            \"first_name\": \"Patrick\",\n            \"middle_name\": null,\n            \"last_name\": \"Nzambu\"\n        },\n        \"relationships\": {\n            \"email\": [\n                [\n                    {\n                        \"type\": \"email\",\n                        \"id\": \"1\",\n                        \"attributes\": {\n                            \"email\": \"patricknzambu@gmail.com\",\n                            \"primary\": 1\n                        },\n                        \"links\": {\n                            \"self\": \"http:\/\/localhost\/microservice\/gateway\/public\/api\/user\/1\/email\/1\"\n                        }\n                    }\n                ]\n            ]\n        },\n        \"links\": {\n            \"self\": \"http:\/\/localhost\/microservice\/gateway\/public\/api\/profile\/1\"\n        }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                },
+                {
+                    "name": "Authentication - Register",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"first_name\":\"ejvnxlkeuzmkbap\",\"middle_name\":\"onlywdxd\",\"last_name\":\"pfudghjqfheddxahtlvj\",\"email\":\"abeatty@example.net\",\"password\":\"fufwcz\",\"password_confirmation\":\"qoiozosg\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Authentication - Logout",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"You have been successfully logged out!\"\n}",
+                            "name": "200"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Payment",
+            "description": "\nOnly authenticated users can make the get and post requests using the endpoints provided in this section. \nIntegration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to\nprovide the parameters in the right place.",
+            "item": [
+                {
+                    "name": "Payment - Create",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pay",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/pay"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"phone\":\"incidunt\",\"amount\":3}"
+                        },
+                        "description": "Make a post request to create a new payment record. Provided form data should be in json format and supplied according to the given example request.\nThe expected response should be similar to example response shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"transaction\": {\n        \"type\": \"payment\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"text\": \"QUEUED\",\n            \"reference\": \"DEMONEWR313EE1507797667127261164\",\n            \"timestamp\": \"2017-10-12 11:41:07\",\n            \"balance_as_of_now\": 1840984\n        }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                },
+                {
+                    "name": "Payment - Show",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pay\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/pay\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "incidunt",
+                                    "description": "The ID of the pay."
+                                },
+                                {
+                                    "id": "pay",
+                                    "key": "pay",
+                                    "value": "consequatur",
+                                    "description": "The reference id of the transaction"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Make a get request to search a particular record. Provide the id of the record at the end of the route as shown on the given example request.\nThe expected response should be similar to example response shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"transaction\": {\n        \"type\": \"payment\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"text\": \"QUEUED\",\n            \"reference\": \"DEMONEWR313EE1507797667127261164\",\n            \"timestamp\": \"2017-10-12 11:41:07\",\n            \"balance_as_of_now\": 1840984\n        }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Profile",
+            "description": "\nOnly authenticated users can make the get, post, put, patch and delete requests using the endpoints provided in this section. \nIntegration into different languages is shown using relevant example requests. Follow the examples as a guide showing how to\nprovide the parameters in the right place.",
+            "item": [
+                {
+                    "name": "Profile - List",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/profile",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/profile"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Make a get request using the endpoint to obtain a list of all available records. The endpoint has no route parameters as seen on the\ngiven example request. The desired response will be similar to the example response shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{ \"data\" : [\n        {\n            \"type\": \"profile\",\n            \"id\": \"1\",\n            \"attributes\": {\n                \"name\": \"Brandt Abshire\",\n                \"email\": \"nkuhn@example.com\"\n            }\n        },\n        {\n            \"type\": \"profile\",\n            \"id\": \"2\",\n            \"attributes\": {\n                \"name\": \"Cicero Franecki DVM\",\n                \"email\": \"lwindler@example.org\"\n            }\n        }\n    ]\n}",
+                            "name": "200"
+                        }
+                    ]
+                },
+                {
+                    "name": "Profile - Create",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/profile",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/profile"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"alias\",\"email\":\"cupiditate\"}"
+                        },
+                        "description": "Make a post request to create a new record. Provided form data should be in json format and supplied according to the given example request.\nThe expected response should be similar to example response shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"profile\": {\n        \"type\": \"profile\",\n        \"id\": \"2\",\n        \"attributes\": {\n            \"name\": \"Brandt Abshire\",\n            \"email\": \"nkuhn@example.com\"\n        }\n    }\n}",
+                            "name": "201"
+                        }
+                    ]
+                },
+                {
+                    "name": "Profile - Show",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/profile\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/profile\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "odit",
+                                    "description": "The ID of the profile."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Make a get request to select a particular record. Provide the id of the record at the end of the route as shown on the given example request.\nThe expected response should be similar to example response shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"profile\": {\n        \"type\": \"profile\",\n        \"id\": \"2\",\n        \"attributes\": {\n            \"name\": \"Brandt Abshire\",\n            \"email\": \"nkuhn@example.com\"\n        }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                },
+                {
+                    "name": "Profile - Update",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/profile\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/profile\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "similique",
+                                    "description": "The ID of the profile."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"quis\",\"email\":\"rerum\"}"
+                        },
+                        "description": "Make a put or patch request to update the record. Provide the id of the record at the end of the route as shown on the given example request.\nThe form data should be in json format and provided according to the example request. The expected response should be similar to example\nresponse shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"profile\": {\n        \"type\": \"profile\",\n        \"id\": \"2\",\n        \"attributes\": {\n            \"name\": \"Brandt Abshire\",\n            \"email\": \"nkuhn@example.com\"\n        }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                },
+                {
+                    "name": "Profile - Delete",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/profile\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/profile\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "numquam",
+                                    "description": "The ID of the profile."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Make a delete request to remove the record. Provide the id of the record at the end of the route as shown on the given example request.\nThe expected response should be similar to example response shown."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"profile\": {\n        \"type\": \"profile\",\n        \"id\": \"2\",\n        \"attributes\": {\n            \"name\": \"Brandt Abshire\",\n            \"email\": \"nkuhn@example.com\"\n        }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

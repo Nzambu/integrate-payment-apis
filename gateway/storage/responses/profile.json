@@ -1,0 +1,35 @@
+{
+    "data": {
+        "type": "profile",
+        "id": "1",
+        "token": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODY1YjRjMjk2Nzg0YjdmMTI3MjE1MWIzYTRmZWY4MDY1YzIxNWJjYWJmZjYyYWFlODkyYmNhOTg3ZWViMWE4MzNmOWZkNDMwZmU5Y2ZhMTMiLCJpYXQiOjE2MjcwNDQyMzAuNDk1OTIyLCJuYmYiOjE2MjcwNDQyMzAuNDk1OTM0LCJleHAiOjE2NTg1ODAyMzAuMzcxNjIzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Gv30f39xc8s3Eg1uFk61mbRtcIrGV9bGsbpF0QDcHTN_EzYt5XR43RBw-leQMSEd1ttzic2lk23-NX_ycOODyyg5nOLfVroCqsyM3AwhQyc5E9hTPeqlmq2CWYrE4d4PyESmOEr4M8AMITZrnUfl9J1kdFFX56bbHOMxWUBffxeyyZ3weH11E9959Uy2WYskTUIio_eb9HbTRU-ZWs5ACwkRscjafL5yyixXpPOSh7nLf0IhL-ccQ9hA2tWYV3kMx8_vaQ_UaIyp2-rNQZQleff-56A3X0vro9-NzrjYvDbxZPnudh21kPuAEh5QLex6LN6EhwL0vkb98ujWokAwDzSveKOVG2z8at8k6NSTtG2Wmxn_jNBm_yS1T_9JjLHO4O2wOCrhsjlXAeL86H0QSu00yZXNVGF9PHHqt7FWzAdKYxyyx6GPuHh6mVYYaUzxli5opqZ9WqSRBTGvKqjqjVf05XH922RlJY6y06CTu9qqFp9nSeHtXcINb1P8RWMFnygyxVkAAvPZNzHWQ7DLxatyS_QRB6jbpmTOW2tAzKF06-Fl34NFoSdSbNP3M2hp0IX85wkLE5ZS_zGq1kFK_xUTrK3W3-Lem6emDyd3F4hjZJwJTwQREbAw12tbFxItOFijr6-u6hepXybiu5NXXocmS_h2j1rrm4r0DkbQC0Y",
+            "type": "Bearer Token"
+        },
+        "attributes": {
+            "first_name": "Patrick",
+            "middle_name": null,
+            "last_name": "Nzambu"
+        },
+        "relationships": {
+            "email": [
+                [
+                    {
+                        "type": "email",
+                        "id": "1",
+                        "attributes": {
+                            "email": "patricknzambu@gmail.com",
+                            "primary": 1
+                        },
+                        "links": {
+                            "self": "http://localhost/microservice/gateway/public/api/user/1/email/1"
+                        }
+                    }
+                ]
+            ]
+        },
+        "links": {
+            "self": "http://localhost/microservice/gateway/public/api/profile/1"
+        }
+    }
+}

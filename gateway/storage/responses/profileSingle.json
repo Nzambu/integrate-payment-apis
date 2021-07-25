@@ -1,0 +1,10 @@
+{
+    "profile": {
+        "type": "profile",
+        "id": "2",
+        "attributes": {
+            "name": "Brandt Abshire",
+            "email": "nkuhn@example.com"
+        }
+    }
+}
